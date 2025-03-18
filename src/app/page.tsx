@@ -21,7 +21,8 @@ export default function Home() {
       } else {
         setOutput("An error occurred. Please try again.");
       }
-    } catch (error) {
+    } catch {
+      // Removed unused 'error' variable
       setOutput("Failed to analyze the code.");
     }
     setLoading(false);
@@ -30,7 +31,8 @@ export default function Home() {
   const formatOutput = (text: string) => {
     if (!text) return "";
     
-    let formatted = text
+    // Changed 'let' to 'const' as the value doesn't change
+    const formatted = text
       .replace(/\*\*(.*?)\*\*/g, '<span class="font-bold">$1</span>')
       .replace(/\*(.*?)\*/g, '<span class="italic">$1</span>')
       .replace(/^# (.*?)$/gm, '<h1 class="text-xl font-bold my-3">$1</h1>')
