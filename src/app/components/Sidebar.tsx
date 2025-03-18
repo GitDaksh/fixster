@@ -27,7 +27,7 @@ export default function Sidebar() {
 
   const isActive = (path: string) => pathname === path;
 
-  const NavLink = ({ href, icon: Icon, label }: { href: string; icon: any; label: string }) => (
+  const NavLink = ({ href, icon: Icon, label }: { href: string; icon: React.ElementType; label: string }) => (
     <Link 
       href={href}
       className={`flex items-center px-4 py-2.5 rounded-lg group transition-all duration-200 ${
