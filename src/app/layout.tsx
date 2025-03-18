@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+import { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Fixster - AI Code Debugger",
-  description: "Debug and explain code with AI-powered insights",
+  description: "A powerful AI-driven code debugging tool",
 };
 
 export default function RootLayout({
@@ -13,11 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-900 text-white">
-        <nav className="w-full p-4 bg-gray-800 shadow-md">
-          <h1 className="text-xl font-bold">Fixster</h1>
-        </nav>
-        <main className="container mx-auto p-6">{children}</main>
+      <body>
+        <div className="flex min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+          {children}
+        </div>
       </body>
     </html>
   );
