@@ -1,15 +1,8 @@
 // app/layout.tsx
 import { Metadata } from "next";
 import "./globals.css";
-
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs';
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "Fixster - AI Code Debugger",
@@ -23,22 +16,16 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body>
-      <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </header>
-        <div className="flex min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
-          {children}
-        </div>
-      </body>
-    </html>
+      <html lang="en">
+        <body>
+          <div className="flex flex-col min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+            <Navbar />
+            <main className="flex-1">
+              {children}
+            </main>
+          </div>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
