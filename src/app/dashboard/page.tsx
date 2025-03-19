@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import ThemeToggle from "../components/ThemeToggle";
 import HistoryPanel from "../components/HistoryPanel";
+import ReactMarkdown from 'react-markdown';
 
 export default function Dashboard() {
   const [code, setCode] = useState("");
@@ -33,11 +34,7 @@ export default function Dashboard() {
         body: JSON.stringify({ code }),
       });
       const data = await response.json();
-      const formattedOutput = data.output
-        .replace(/[*#]+/g, "")
-        .replace(/\n\s*\n/g, "\n")
-        .trim();
-      setOutput(formattedOutput || "No useful output. Please check your code.");
+      setOutput(data.output || "No useful output. Please check your code.");
       saveToHistory(code);
     } catch {
       setOutput("Something went wrong. Please try again.");
@@ -47,10 +44,8 @@ export default function Dashboard() {
   
   return (
     <div className="flex w-full min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
-      {/* Sidebar */}
       <Sidebar />
       
-      {/* Main Content */}
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto px-6 py-8 space-y-6">
           <div className="flex justify-between items-center">
@@ -60,7 +55,6 @@ export default function Dashboard() {
             <ThemeToggle />
           </div>
           
-          {/* Code Input */}
           <div className="rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-200 hover:shadow-xl">
             <div className="px-4 py-3 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
               <div className="flex space-x-2">
@@ -79,7 +73,6 @@ export default function Dashboard() {
             />
           </div>
           
-          {/* Analyze Button */}
           <button
             className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold text-lg transition-all duration-300 hover:from-blue-600 hover:to-purple-700 hover:shadow-lg hover:shadow-blue-500/20 active:scale-98 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:shadow-none"
             onClick={handleAnalyze}
@@ -96,7 +89,6 @@ export default function Dashboard() {
             ) : "Analyze Code"}
           </button>
           
-          {/* Output Section */}
           {output && (
             <div className="rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-200 hover:shadow-xl">
               <div className="px-4 py-3 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center">
@@ -104,15 +96,17 @@ export default function Dashboard() {
                 <h2 className="text-lg font-semibold text-slate-800 dark:text-white">Analysis Results</h2>
               </div>
               <div className="p-5">
-                <pre className="text-sm font-mono whitespace-pre-wrap text-slate-800 dark:text-slate-200 bg-slate-50 dark:bg-slate-900 p-4 rounded-lg overflow-auto max-h-96">{output}</pre>
+                <div className="prose prose-slate dark:prose-invert prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-headings:border-b prose-headings:border-slate-200 dark:prose-headings:border-slate-700 prose-headings:pb-2 prose-headings:mb-4 prose-h2:text-lg prose-h2:font-semibold prose-headings:text-slate-800 dark:prose-headings:text-white max-w-none">
+                  <ReactMarkdown>
+                    {output}
+                  </ReactMarkdown>
+                </div>
               </div>
             </div>
           )}
           
-          {/* History Panel */}
           <HistoryPanel history={history} setCode={setCode} />
           
-          {/* Recent Projects */}
           <div className="rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-200 hover:shadow-xl">
             <div className="px-4 py-3 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center">
               <h2 className="text-lg font-semibold text-slate-800 dark:text-white">Recent Projects</h2>
@@ -137,7 +131,7 @@ export default function Dashboard() {
           </div>
           
           <div className="text-center text-slate-500 dark:text-slate-400 text-sm py-6">
-            Powered by OpenAI • Built with Next.js & Tailwind CSS
+            Powered by Gemini • Built with Next.js & Tailwind CSS
           </div>
         </div>
       </div>
