@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.12.5",
     "@google/generative-ai": "^0.24.0",
     "axios": "^1.8.3",
     "lucide-react": "^0.483.0",
