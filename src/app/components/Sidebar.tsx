@@ -6,10 +6,12 @@ import {
   Home, Info, Code, Settings, History, Moon, Sun, Github, 
   User, HelpCircle, ExternalLink, Star, BookOpen, MessageCircle 
 } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 export default function Sidebar() {
   const pathname = usePathname();
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const { user, isLoaded } = useUser();
   
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -69,15 +71,39 @@ export default function Sidebar() {
       </div>
       
       <div className="p-4 border-b border-slate-200 dark:border-slate-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center shadow-inner">
-            <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+        {isLoaded && user ? (
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center shadow-inner overflow-hidden">
+              {user.imageUrl ? (
+                <img 
+                  src={user.imageUrl} 
+                  alt={user.fullName || "User"} 
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              )}
+            </div>
+            <div>
+              <p className="font-medium text-slate-800 dark:text-slate-200 truncate">
+                {user.fullName || user.username || "User"}
+              </p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                {user.primaryEmailAddress?.emailAddress || "No email"}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="font-medium text-slate-800 dark:text-slate-200">Guest User</p>
-            <p className="text-xs text-slate-500 dark:text-slate-400">guest@example.com</p>
+        ) : (
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center shadow-inner">
+              <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div>
+              <p className="font-medium text-slate-800 dark:text-slate-200">Loading...</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Please wait</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto">

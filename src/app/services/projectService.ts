@@ -1,5 +1,14 @@
 "use client";
 
+export interface ChatMessage {
+  id: string;
+  text: string;
+  sender: "user" | "assistant";
+  timestamp: number;
+  type?: "text" | "code" | "image";
+  status?: "sending" | "sent" | "error";
+}
+
 export interface Project {
   id: string;
   userId: string;
@@ -7,6 +16,7 @@ export interface Project {
   description: string;
   code: string;
   status: 'In Progress' | 'Completed' | 'Archived';
+  chatHistory: ChatMessage[];
   createdAt: number;
   updatedAt: number;
 }
@@ -25,7 +35,17 @@ export function getUserProjects(userId: string): Project[] {
   }
 }
 
-export function saveUserProject(userId: string, project: Omit<Project, 'id' | 'userId' | 'createdAt' | 'updatedAt'>): Project {
+export function getProject(userId: string, projectId: string): Project | null {
+  try {
+    const projects = getUserProjects(userId);
+    return projects.find(p => p.id === projectId) || null;
+  } catch (error) {
+    console.error('Error retrieving project:', error);
+    return null;
+  }
+}
+
+export function saveUserProject(userId: string, project: Omit<Project, 'id' | 'userId' | 'createdAt' | 'updatedAt' | 'chatHistory'>): Project {
   if (typeof window === 'undefined') throw new Error('Cannot save project on server side');
   
   try {
@@ -37,6 +57,7 @@ export function saveUserProject(userId: string, project: Omit<Project, 'id' | 'u
       ...project,
       id: `proj_${timestamp}_${Math.random().toString(36).substring(2, 9)}`,
       userId,
+      chatHistory: [],
       createdAt: timestamp,
       updatedAt: timestamp
     };
@@ -74,6 +95,28 @@ export function updateUserProject(userId: string, projectId: string, updates: Pa
     return updatedProject;
   } catch (error) {
     console.error('Error updating user project:', error);
+    throw error;
+  }
+}
+
+export function addMessageToProject(userId: string, projectId: string, message: Omit<ChatMessage, 'id' | 'timestamp'>): Project {
+  if (typeof window === 'undefined') throw new Error('Cannot update project on server side');
+  
+  try {
+    const project = getProject(userId, projectId);
+    if (!project) throw new Error('Project not found');
+    
+    const newMessage: ChatMessage = {
+      ...message,
+      id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+      timestamp: Date.now(),
+    };
+    
+    return updateUserProject(userId, projectId, {
+      chatHistory: [...(project.chatHistory || []), newMessage]
+    });
+  } catch (error) {
+    console.error('Error adding message to project:', error);
     throw error;
   }
 }

@@ -7,9 +7,17 @@ export default function ThemeToggle() {
   
   // Check current theme on mount
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsDarkMode(document.documentElement.classList.contains("dark") || 
-                   localStorage.getItem("theme") === "dark");
+    // Check if user has a theme preference in localStorage
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    
+    // Set initial theme based on localStorage or system preference
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
     }
   }, []);
   
@@ -17,6 +25,8 @@ export default function ThemeToggle() {
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
+    
+    // Update localStorage and document class
     localStorage.setItem("theme", newMode ? "dark" : "light");
     document.documentElement.classList.toggle("dark", newMode);
   };
@@ -24,18 +34,18 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleDarkMode}
-      className="flex items-center gap-2 py-2 px-4 bg-white dark:bg-slate-800 rounded-full shadow-md hover:shadow-lg transition-all duration-300 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700"
+      className="flex items-center gap-2 py-2 px-3 bg-slate-100 dark:bg-slate-800 rounded-lg transition-colors hover:bg-slate-200 dark:hover:bg-slate-700"
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDarkMode ? (
         <>
           <Sun className="h-4 w-4 text-amber-500" />
-          <span className="font-medium text-sm">Light</span>
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Light</span>
         </>
       ) : (
         <>
-          <Moon className="h-4 w-4 text-indigo-500" />
-          <span className="font-medium text-sm">Dark</span>
+          <Moon className="h-4 w-4 text-slate-700" />
+          <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Dark</span>
         </>
       )}
     </button>

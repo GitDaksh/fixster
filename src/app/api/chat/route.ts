@@ -1,30 +1,35 @@
 import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
+// Make sure we have an API key
+if (!process.env.GEMINI_API_KEY) {
+  console.error("Missing Gemini API key in environment variables!");
+}
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "");
 
 export async function POST(req: Request) {
   try {
-    const { code } = await req.json();
+    const { message } = await req.json();
 
-    if (!code) {
+    if (!message) {
       return NextResponse.json({ error: "No message provided" }, { status: 400 });
     }
 
     if (!process.env.GEMINI_API_KEY) {
       console.error("Missing Gemini API key!");
       return NextResponse.json({ 
-        output: "I'm sorry, I'm having trouble connecting to my services. Please try again later." 
+        output: "Error: Gemini API key is not configured. Please check your environment variables." 
       });
     }
 
     try {
-      const response = await generateChatResponse(code);
+      const response = await generateChatResponse(message);
       return NextResponse.json({ output: response });
     } catch (geminiError) {
       console.error("Gemini API error:", geminiError);
       return NextResponse.json({ 
-        output: "I'm sorry, I'm having trouble processing your request right now. Please try again later."
+        output: "I'm sorry, I'm having trouble processing your request right now. Please check your API key configuration and try again."
       });
     }
     
