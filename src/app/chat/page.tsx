@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Send, Paperclip, Mic, Smile, Code, Image as ImageIcon, Loader2 } from "lucide-react";
+import { Send, Paperclip, Mic, Smile, Code, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import Sidebar from "../components/Sidebar";
 import { useUser } from "@clerk/nextjs";
@@ -93,10 +93,6 @@ export default function ChatPage() {
     if (e.target.files) {
       setAttachments([...attachments, ...Array.from(e.target.files)]);
     }
-  };
-
-  const removeAttachment = (index: number) => {
-    setAttachments(attachments.filter((_, i) => i !== index));
   };
 
   const startRecording = () => {

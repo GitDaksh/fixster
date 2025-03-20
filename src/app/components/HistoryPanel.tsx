@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Clock, ArrowUpRight } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
-import { getProject, ChatMessage } from "../services/projectService";
+import { getProject } from "../services/projectService";
 
 interface HistoryPanelProps {
   setCode: (code: string) => void;
