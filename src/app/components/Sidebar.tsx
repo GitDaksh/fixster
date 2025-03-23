@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { 
-  Home, Info, Code, Settings, History, Moon, Sun, Github, 
+  Home, Info, Settings, History, Moon, Sun, Github, 
   User, HelpCircle, ExternalLink, Star, BookOpen, MessageCircle 
 } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
@@ -68,10 +69,12 @@ export default function Sidebar() {
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 flex items-center justify-center shadow-inner overflow-hidden">
               {user.imageUrl ? (
-                <img 
+                <Image 
                   src={user.imageUrl} 
                   alt={user.fullName || "User"} 
-                  className="w-full h-full object-cover"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover rounded-full"
                 />
               ) : (
                 <User className="h-5 w-5 text-blue-600 dark:text-blue-400" />

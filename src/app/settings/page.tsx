@@ -2,11 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import { useUser } from "@clerk/nextjs";
 import { Bell, Lock, Palette, Globe, Shield, Trash2 } from "lucide-react";
 
 export default function SettingsPage() {
-  const { user } = useUser();
   const [notifications, setNotifications] = useState({
     email: true,
     push: false,
