@@ -39,7 +39,7 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group ml-0">
           <div className="relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-70 group-hover:opacity-100 blur-md transition-all duration-300 group-hover:scale-110"></div>
             <div className="relative bg-white dark:bg-slate-900 rounded-full p-1.5">

@@ -63,13 +63,6 @@ export default function Sidebar() {
 
   return (
     <aside className="w-64 h-screen sticky top-0 bg-white dark:bg-slate-950 shadow-lg flex flex-col border-r border-slate-200 dark:border-slate-800 transition-colors duration-300">
-      <div className="p-6 border-b border-slate-200 dark:border-slate-800">
-        <Link href="/" className="flex items-center gap-2 group">
-          <Code className="h-6 w-6 text-blue-600 dark:text-blue-400 group-hover:rotate-12 transition-transform duration-300" />
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Fixster</h2>
-        </Link>
-      </div>
-      
       <div className="p-4 border-b border-slate-200 dark:border-slate-800">
         {isLoaded && user ? (
           <div className="flex items-center space-x-3">
@@ -116,8 +109,24 @@ export default function Sidebar() {
         
         <div className="pt-6">
           <p className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Resources</p>
-          <NavLink href="/docs" icon={BookOpen} label="Documentation" />
-          <NavLink href="/about" icon={Info} label="About" />
+          <a 
+            href="https://nextjs.org/docs" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center px-4 py-2.5 rounded-lg group transition-all duration-200 text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-800"
+          >
+            <BookOpen className="h-5 w-5 mr-3 text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+            <span className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">Documentation</span>
+          </a>
+          <a 
+            href="https://github.com/GitDaksh/fixster" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center px-4 py-2.5 rounded-lg group transition-all duration-200 text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-slate-800"
+          >
+            <Info className="h-5 w-5 mr-3 text-slate-500 group-hover:text-blue-600 dark:group-hover:text-blue-400" />
+            <span className="font-medium group-hover:text-blue-600 dark:group-hover:text-blue-400">About</span>
+          </a>
         </div>
       </nav>
       
