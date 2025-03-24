@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, Paperclip, Mic, Smile, Code, Loader2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
-import Sidebar from "../components/Sidebar";
 import { useUser } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";

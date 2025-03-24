@@ -5,7 +5,7 @@ import Editor from "@monaco-editor/react";
 import PageLayout from "../components/PageLayout";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { Play, Save, FileCode, Settings, Terminal, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Play, Save, FileCode, Terminal, X } from "lucide-react";
 
 // Define a type for the editor instance
 type MonacoEditor = Parameters<NonNullable<Parameters<typeof Editor>[0]["onMount"]>>[0];
@@ -18,9 +18,7 @@ export default function EditorPage() {
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [outputHeight, setOutputHeight] = useState(200);
-  const [isOutputExpanded, setIsOutputExpanded] = useState(false);
   const editorRef = useRef<MonacoEditor | null>(null);
-  const [loading, setLoading] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [fileName, setFileName] = useState("");
   const fileExtensions = {
@@ -37,7 +35,7 @@ export default function EditorPage() {
     }
   }, [user, router]);
 
-  const handleEditorDidMount = (editor: any) => {
+  const handleEditorDidMount = (editor: MonacoEditor) => {
     editorRef.current = editor;
   };
 
@@ -56,7 +54,7 @@ export default function EditorPage() {
       
       const data = await response.json();
       setOutput(data.output || "No output");
-    } catch (error) {
+    } catch {
       setOutput("Error running code. Please try again.");
     } finally {
       setIsRunning(false);
