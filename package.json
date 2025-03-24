@@ -11,10 +11,13 @@
   "dependencies": {
     "@clerk/nextjs": "^6.12.5",
     "@google/generative-ai": "^0.24.0",
+    "@monaco-editor/react": "^4.7.0",
+    "@types/nodemailer": "^6.4.17",
     "axios": "^1.8.3",
     "framer-motion": "^12.5.0",
     "lucide-react": "^0.483.0",
     "next": "15.2.3",
+    "nodemailer": "^6.10.0",
     "openai": "^4.87.3",
     "postcss": "^8.5.3",
     "pyodide": "^0.27.4",
@@ -28,8 +31,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
     "eslint": "^9",
-    "eslint-config-next": "15.2.3",
+    "eslint-config-next": "^15.2.3",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.4",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4.0.14",
     "typescript": "^5"
   }

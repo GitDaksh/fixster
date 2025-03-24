@@ -22,7 +22,10 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{
               __html: `
                 try {
-                  if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  const savedTheme = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  
+                  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
@@ -32,12 +35,10 @@ export default function RootLayout({
             }}
           />
         </head>
-        <body>
-          <div className="flex flex-col min-h-screen bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
+        <body className="bg-slate-900">
+          <Navbar />
+          <div className="pt-16">
+            {children}
           </div>
         </body>
       </html>

@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
-import ThemeToggle from "../components/ThemeToggle";
 import HistoryPanel from "../components/HistoryPanel";
 import ReactMarkdown from 'react-markdown';
 import { useUser } from "@clerk/nextjs";
@@ -74,27 +73,25 @@ export default function Dashboard() {
   };
   
   return (
-    <div className="flex w-full min-h-screen bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200">
+    <div className="min-h-screen bg-slate-900">
       <Sidebar />
-      
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+      <main className="ml-64">
+        <div className="max-w-4xl mx-auto p-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">
                 Fixster
               </h1>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">AI-powered code debugging assistant</p>
+              <p className="text-sm text-slate-400 mt-1">AI-powered code debugging assistant</p>
             </div>
             <div className="flex items-center space-x-4">
               <button
                 onClick={handleCreateNewProject}
-                className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg transition-all duration-300 transform hover:scale-105 hover:bg-blue-600 hover:shadow-lg cursor-pointer active:scale-100"
               >
                 <PlusCircle className="w-5 h-5 mr-2" />
                 New Project
               </button>
-              <ThemeToggle />
             </div>
           </div>
           
@@ -117,7 +114,7 @@ export default function Dashboard() {
           </div>
           
           <button
-            className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium text-sm transition-all duration-200 hover:bg-blue-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed relative"
+            className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium text-sm transition-all duration-300 transform hover:scale-[1.02] hover:bg-blue-700 hover:shadow-lg cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 disabled:hover:shadow-none relative"
             onClick={handleAnalyze}
             disabled={loading || !code.trim()}
           >
@@ -149,9 +146,73 @@ export default function Dashboard() {
               </div>
               <div className="p-4">
                 <div className="prose prose-sm prose-slate dark:prose-invert max-w-none">
-                  <ReactMarkdown>
-                    {output}
-                  </ReactMarkdown>
+                  <div className="space-y-4">
+                    {output.includes('# ') ? (
+                      // Formatted output with sections
+                      output.split('\n\n').map((section, index) => {
+                        const lines = section.split('\n');
+                        const title = lines.find(line => line.startsWith('#'));
+                        const content = lines.filter(line => !line.startsWith('#'));
+                        
+                        if (!title) {
+                          // Handle sections without titles
+                          return (
+                            <div key={index} className="bg-slate-800/40 rounded-lg p-4">
+                              {lines.map((line, lineIndex) => (
+                                <p key={lineIndex} className="text-slate-300 my-1">
+                                  {line}
+                                </p>
+                              ))}
+                            </div>
+                          );
+                        }
+                        
+                        return (
+                          <div key={index} className="rounded-lg overflow-hidden">
+                            <div className="bg-gradient-to-r from-slate-700/50 to-slate-800/50 px-4 py-3 border-b border-slate-700">
+                              <h3 className="text-slate-100 font-semibold text-base">
+                                {title.replace(/^#+\s*/, '')}
+                              </h3>
+                            </div>
+                            <div className="bg-slate-800/40 p-4 space-y-2">
+                              {content.map((line, lineIndex) => {
+                                if (line.startsWith('```')) {
+                                  return (
+                                    <pre key={lineIndex} className="bg-slate-800/60 p-3 rounded-md overflow-x-auto">
+                                      <code className="text-sm font-mono text-slate-300">{line.replace(/```/g, '')}</code>
+                                    </pre>
+                                  );
+                                }
+                                if (line.startsWith('- ')) {
+                                  return (
+                                    <div key={lineIndex} className="flex items-start space-x-2">
+                                      <span className="text-slate-400 mt-0.5">•</span>
+                                      <span className="text-slate-300 flex-1">{line.replace(/^-\s*/, '')}</span>
+                                    </div>
+                                  );
+                                }
+                                if (line.trim()) {
+                                  return (
+                                    <p key={lineIndex} className="text-slate-300">
+                                      {line}
+                                    </p>
+                                  );
+                                }
+                                return null;
+                              })}
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      // Plain text output
+                      <div className="bg-slate-800/40 rounded-lg p-4">
+                        <pre className="text-sm font-mono text-slate-300 whitespace-pre-wrap">
+                          {output}
+                        </pre>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
@@ -237,7 +298,7 @@ export default function Dashboard() {
             </div>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 }

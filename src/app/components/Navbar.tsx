@@ -31,13 +31,9 @@ export default function Navbar() {
   };
 
   return (
-    <nav 
-      className={`sticky top-0 z-40 border-b backdrop-blur-md bg-white/90 dark:bg-slate-950/90 transition-all duration-300 ${
-        isScrolled 
-          ? "border-slate-200 dark:border-slate-800 shadow-md" 
-          : "border-transparent"
-      }`}
-    >
+    <nav className={`fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 shadow-sm border-b border-slate-200 dark:border-slate-800 z-50 transition-all duration-200 ${
+      isScrolled ? 'shadow-md' : ''
+    }`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-2 group ml-0">
           <div className="relative">

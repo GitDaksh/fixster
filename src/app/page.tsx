@@ -63,7 +63,7 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           <button
             onClick={() => router.push("/new-project")}
-            className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all duration-300"
+            className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all duration-300 cursor-pointer"
           >
             <div className="p-8">
               <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
@@ -79,7 +79,7 @@ export default function LandingPage() {
 
           <button
             onClick={() => router.push("/projects")}
-            className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all duration-300"
+            className="group relative bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all duration-300 cursor-pointer"
           >
             <div className="p-8">
               <div className="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
@@ -109,7 +109,7 @@ export default function LandingPage() {
                     localStorage.setItem("activeProject", project.id);
                     router.push("/dashboard");
                   }}
-                  className="flex items-center p-4 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                  className="flex items-center p-4 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors cursor-pointer"
                 >
                   <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white mr-4">
                     {project.name.charAt(0).toUpperCase()}

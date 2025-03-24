@@ -39,18 +39,41 @@ export async function POST(req: Request) {
 async function analyzeCodeWithGemini(code: string): Promise<string> {
   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
   
-  const prompt = `You are an expert code debugger and analyzer. Analyze the provided code for bugs, inefficiencies, and potential improvements. 
-  Format your response in Markdown with the following sections:
-  1. Code Overview - Briefly describe what the code seems to be doing
-  2. Issues Found - List and describe any bugs, errors, or code smells
-  3. Performance Considerations - Note any inefficiencies or performance issues
-  4. Best Practices - Suggest improvements based on modern development standards
-  5. Security Concerns - Highlight any security vulnerabilities
-  6. Recommendations - Provide specific code improvements with examples
-  
-  Here is the code to analyze:
-  
-  ${code}`;
+  const prompt = `You are an expert code debugger and analyzer. Analyze the provided code and format your response in a clear, structured way using Markdown. Include the following sections:
+
+# Code Overview
+Provide a brief description of what the code does.
+
+# Issues Found
+- List any bugs, errors, or code smells
+- Each issue should be on a new line starting with a dash (-)
+- Include specific line numbers or sections where issues are found
+
+# Performance Considerations
+- List any performance issues or inefficiencies
+- Each point should be on a new line starting with a dash (-)
+- Include suggestions for optimization
+
+# Best Practices
+- List improvements based on modern development standards
+- Each point should be on a new line starting with a dash (-)
+- Include code examples where relevant
+
+# Security Concerns
+- List any security vulnerabilities
+- Each point should be on a new line starting with a dash (-)
+- Include severity level and potential impact
+
+# Recommendations
+Provide specific code improvements with examples in code blocks:
+
+\`\`\`
+// Example of improved code
+\`\`\`
+
+Here is the code to analyze:
+
+${code}`;
 
   const result = await model.generateContent(prompt);
   const response = result.response;
