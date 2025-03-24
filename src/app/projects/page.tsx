@@ -162,8 +162,8 @@ export default function ProjectsPage() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 animate-backdrop">
           <div className="bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4 animate-modal-enter">
             <h2 className="text-xl font-semibold mb-4 text-white">Delete Project</h2>
-            <p className="text-slate-400 mb-6">
-              Are you sure you want to delete "{projectToDelete?.name}"? This action cannot be undone.
+            <p className="text-slate-500 dark:text-slate-400 mb-6">
+              Are you sure you want to delete &quot;{projectToDelete?.name}&quot;? This action cannot be undone.
             </p>
             <div className="flex justify-end space-x-3">
               <button

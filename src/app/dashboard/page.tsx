@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import HistoryPanel from "../components/HistoryPanel";
-import ReactMarkdown from 'react-markdown';
 import { useUser } from "@clerk/nextjs";
 import { getUserProjects, Project } from "../services/projectService";
 import { useRouter } from "next/navigation";

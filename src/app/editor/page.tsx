@@ -5,7 +5,10 @@ import Editor from "@monaco-editor/react";
 import PageLayout from "../components/PageLayout";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { Play, Save, FileCode, Settings, Terminal, X } from "lucide-react";
+import { Play, Save, FileCode, Settings, Terminal, X, ChevronDown, ChevronUp } from "lucide-react";
+
+// Define a type for the editor instance
+type MonacoEditor = Parameters<NonNullable<Parameters<typeof Editor>[0]["onMount"]>>[0];
 
 export default function EditorPage() {
   const router = useRouter();
@@ -15,10 +18,11 @@ export default function EditorPage() {
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [outputHeight, setOutputHeight] = useState(200);
-  const editorRef = useRef(null);
+  const [isOutputExpanded, setIsOutputExpanded] = useState(false);
+  const editorRef = useRef<MonacoEditor | null>(null);
   const [loading, setLoading] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [filename, setFilename] = useState("");
+  const [fileName, setFileName] = useState("");
   const fileExtensions = {
     javascript: "js",
     typescript: "ts",
@@ -60,15 +64,15 @@ export default function EditorPage() {
   };
 
   const handleSaveCode = () => {
-    setFilename("");
+    setFileName("");
     setShowSaveModal(true);
   };
 
   const handleDownload = () => {
-    if (!filename.trim()) return;
+    if (!fileName.trim()) return;
     
     const extension = fileExtensions[language];
-    const fullFilename = filename.endsWith(`.${extension}`) ? filename : `${filename}.${extension}`;
+    const fullFilename = fileName.endsWith(`.${extension}`) ? fileName : `${fileName}.${extension}`;
     
     const blob = new Blob([code], { type: 'text/plain' });
     const url = window.URL.createObjectURL(blob);
@@ -214,8 +218,8 @@ export default function EditorPage() {
                     <input
                       type="text"
                       id="filename"
-                      value={filename}
-                      onChange={(e) => setFilename(e.target.value)}
+                      value={fileName}
+                      onChange={(e) => setFileName(e.target.value)}
                       placeholder={`Enter filename (e.g., main.${fileExtensions[language]})`}
                       className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                       autoFocus
@@ -236,7 +240,7 @@ export default function EditorPage() {
               </button>
               <button
                 onClick={handleDownload}
-                disabled={!filename.trim()}
+                disabled={!fileName.trim()}
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 active:scale-100 duration-200"
               >
                 Save

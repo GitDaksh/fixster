@@ -38,6 +38,7 @@ export default function SupportModal({ isOpen, onClose, userEmail }: SupportModa
         setStatus("idle");
       }, 2000);
     } catch (error) {
+      console.error('Error submitting support request:', error);
       setStatus("error");
     } finally {
       setIsSending(false);
@@ -63,7 +64,7 @@ export default function SupportModal({ isOpen, onClose, userEmail }: SupportModa
         {/* Content */}
         <div className="p-6">
           <p className="text-slate-600 dark:text-slate-300 mb-6">
-            Need help? Send us a message and we'll get back to you as soon as possible.
+            Need help? Send us a message and we&apos;ll get back to you as soon as possible.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -105,7 +106,7 @@ export default function SupportModal({ isOpen, onClose, userEmail }: SupportModa
 
             {status === "success" && (
               <div className="text-green-500 text-sm bg-green-100 dark:bg-green-900/50 p-3 rounded-lg">
-                Message sent successfully! We'll get back to you soon.
+                Message sent successfully! We&apos;ll get back to you soon.
               </div>
             )}
 
