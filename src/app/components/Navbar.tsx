@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Menu, X, Code, Sun, Moon, ChevronDown } from "lucide-react";
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
-export default function Navbar() {
+export default function Navbar({ className = "" }: { className?: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className={`fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 shadow-sm border-b border-slate-200 dark:border-slate-800 z-50 transition-all duration-200 ${
       isScrolled ? 'shadow-md' : ''
-    }`}>
+    } ${className}`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between py-4">
         <Link href="/" className="flex items-center gap-2 group ml-0">
           <div className="relative">

@@ -8,6 +8,7 @@ import { useUser } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { getProject, addMessageToProject, ChatMessage as ProjectMessage } from "../services/projectService";
+import PageLayout from "../components/PageLayout";
 
 // Extend the ProjectMessage type but with a Date instead of number for timestamp
 interface Message extends Omit<ProjectMessage, 'timestamp'> {
@@ -181,26 +182,24 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen w-screen bg-slate-50 dark:bg-slate-900">
-      <Sidebar />
-
-      <div className="flex-1 flex flex-col h-full overflow-hidden">
-        <div className="border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 py-4 px-6 shadow-sm">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                <Code className="h-5 w-5 text-white" />
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold text-slate-900 dark:text-white">AI Assistant</h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400">Always here to help</p>
-              </div>
+    <PageLayout>
+      <div className="flex flex-col h-[calc(100vh-64px)] bg-slate-800 rounded-lg overflow-hidden">
+        {/* Header */}
+        <div className="h-14 border-b border-slate-700 bg-slate-800 flex items-center px-6">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+              <Code className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold text-white">AI Assistant</h1>
+              <p className="text-sm text-slate-400">Always here to help</p>
             </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-6 py-4">
-          <div className="space-y-6 pb-4 pt-12">
+        {/* Messages Area */}
+        <div className="flex-1 overflow-y-auto px-6 py-4 bg-slate-900">
+          <div className="space-y-6">
             <AnimatePresence>
               {messages.map((msg) => (
                 <motion.div
@@ -214,7 +213,7 @@ export default function ChatPage() {
                     className={`relative px-4 py-3 rounded-2xl max-w-[75%] ${
                       msg.sender === "user"
                         ? "bg-blue-500 text-white"
-                        : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                        : "bg-slate-800 text-slate-200 border border-slate-700"
                     }`}
                   >
                     {msg.sender === "assistant" && (
@@ -225,7 +224,7 @@ export default function ChatPage() {
                     
                     <div className={msg.sender === "assistant" ? "ml-4" : ""}>
                       {msg.type === "code" ? (
-                        <pre className="bg-slate-100 dark:bg-slate-700 p-3 rounded-lg overflow-x-auto">
+                        <pre className="bg-slate-700 p-3 rounded-lg overflow-x-auto">
                           <code>{msg.text}</code>
                         </pre>
                       ) : (
@@ -257,16 +256,17 @@ export default function ChatPage() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="px-4 pb-4 pt-2 bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700">
+        {/* Input Area */}
+        <div className="p-4 bg-slate-800 border-t border-slate-700">
           <div className="max-w-4xl mx-auto">
-            <div className="flex items-end bg-slate-50 dark:bg-slate-800 rounded-xl shadow-sm">
+            <div className="flex items-end bg-slate-900 rounded-xl shadow-sm">
               <div className="flex-1 flex items-end min-h-[44px]">
                 <textarea
                   ref={textareaRef}
                   value={input}
                   onChange={handleInputChange}
                   onKeyDown={handleKeyDown}
-                  className="flex-1 bg-transparent outline-none text-slate-900 dark:text-slate-100 resize-none max-h-32 py-3 px-4"
+                  className="flex-1 bg-transparent outline-none text-slate-100 resize-none max-h-32 py-3 px-4"
                   placeholder="Type your message..."
                   rows={1}
                   disabled={isTyping}
@@ -274,10 +274,10 @@ export default function ChatPage() {
                 <div className="flex items-center px-2 py-1 space-x-1">
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2 hover:bg-slate-200/50 dark:hover:bg-slate-600/50 rounded-full transition-colors"
+                    className="p-2 hover:bg-slate-700 rounded-full transition-colors"
                     title="Attach file"
                   >
-                    <Paperclip className="h-5 w-5 text-slate-500" />
+                    <Paperclip className="h-5 w-5 text-slate-400" />
                   </button>
                   <input
                     ref={fileInputRef}
@@ -288,21 +288,21 @@ export default function ChatPage() {
                   />
                   <button
                     onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                    className="p-2 hover:bg-slate-200/50 dark:hover:bg-slate-600/50 rounded-full transition-colors"
+                    className="p-2 hover:bg-slate-700 rounded-full transition-colors"
                     title="Add emoji"
                   >
-                    <Smile className="h-5 w-5 text-slate-500" />
+                    <Smile className="h-5 w-5 text-slate-400" />
                   </button>
                   <button
                     onClick={isRecording ? stopRecording : startRecording}
-                    className={`p-2 hover:bg-slate-200/50 dark:hover:bg-slate-600/50 rounded-full transition-colors ${
-                      isRecording ? "text-red-500" : "text-slate-500"
+                    className={`p-2 hover:bg-slate-700 rounded-full transition-colors ${
+                      isRecording ? "text-red-500" : "text-slate-400"
                     }`}
                     title={isRecording ? "Stop recording" : "Start recording"}
                   >
                     <Mic className="h-5 w-5" />
                   </button>
-                  <div className="h-8 w-px bg-slate-200 dark:bg-slate-600 mx-2" />
+                  <div className="h-8 w-px bg-slate-700 mx-2" />
                   <button
                     onClick={sendMessage}
                     disabled={isTyping || (!input.trim() && attachments.length === 0)}
@@ -317,6 +317,6 @@ export default function ChatPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }

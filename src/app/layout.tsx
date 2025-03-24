@@ -35,10 +35,12 @@ export default function RootLayout({
             }}
           />
         </head>
-        <body className="bg-slate-900">
-          <Navbar />
-          <div className="pt-16">
-            {children}
+        <body className="min-h-screen bg-slate-900">
+          <div className="flex h-screen overflow-hidden">
+            <Navbar className="fixed top-0 left-0 right-0 h-16 z-50" />
+            <div className="flex-1 pt-16">
+              {children}
+            </div>
           </div>
         </body>
       </html>

@@ -73,10 +73,10 @@ export default function Dashboard() {
   };
   
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="flex h-[calc(100vh-64px)]">
       <Sidebar />
-      <main className="ml-64">
-        <div className="max-w-4xl mx-auto p-6">
+      <main className="flex-1 ml-64 overflow-y-auto">
+        <div className="max-w-4xl mx-auto p-6 space-y-6">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-white">
@@ -95,7 +95,7 @@ export default function Dashboard() {
             </div>
           </div>
           
-          <div className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+          <div className="rounded-lg border border-slate-700 bg-slate-800 overflow-hidden">
             <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center">
               <div className="flex space-x-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
