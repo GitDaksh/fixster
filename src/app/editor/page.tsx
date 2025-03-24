@@ -10,24 +10,28 @@ import { Play, Save, FileCode, Terminal, X } from "lucide-react";
 // Define a type for the editor instance
 type MonacoEditor = Parameters<NonNullable<Parameters<typeof Editor>[0]["onMount"]>>[0];
 
+// Define supported languages
+type SupportedLanguage = "javascript" | "typescript" | "python" | "java" | "cpp";
+
+const fileExtensions: Record<SupportedLanguage, string> = {
+  javascript: "js",
+  typescript: "ts",
+  python: "py",
+  java: "java",
+  cpp: "cpp"
+};
+
 export default function EditorPage() {
   const router = useRouter();
   const { user } = useUser();
   const [code, setCode] = useState("// Start coding here...");
-  const [language, setLanguage] = useState("javascript");
+  const [language, setLanguage] = useState<SupportedLanguage>("javascript");
   const [output, setOutput] = useState("");
   const [isRunning, setIsRunning] = useState(false);
   const [outputHeight, setOutputHeight] = useState(200);
   const editorRef = useRef<MonacoEditor | null>(null);
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [fileName, setFileName] = useState("");
-  const fileExtensions = {
-    javascript: "js",
-    typescript: "ts",
-    python: "py",
-    java: "java",
-    cpp: "cpp"
-  };
 
   useEffect(() => {
     if (!user) {
@@ -99,7 +103,7 @@ export default function EditorPage() {
           </div>
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => setLanguage(e.target.value as SupportedLanguage)}
             className="px-3 py-1.5 bg-slate-700 border border-slate-600 rounded-md text-sm text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="javascript">JavaScript</option>
