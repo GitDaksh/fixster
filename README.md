@@ -50,7 +50,7 @@
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/fixster.git
+git clone https://github.com/GitDaksh/fixster.git
 cd fixster
 ```
 
