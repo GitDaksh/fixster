@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛠️ Fixster
 
-## Getting Started
+<div align="center">
+  
+  <p align="center">
+    An AI-powered code debugging and development assistant
+  </p>
 
-First, run the development server:
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#tech-stack">Tech Stack</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#usage">Usage</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
+</div>
 
+## ✨ Features
+
+- 🤖 **AI-Powered Debugging** - Get intelligent suggestions and fixes for your code
+- 💻 **Interactive Code Editor** - Built-in Monaco editor with syntax highlighting
+- 🌈 **Multi-Language Support** - JavaScript, TypeScript, Python, Java, and C++
+- 💬 **AI Chat Assistant** - Real-time coding help and explanations
+- 📁 **Project Management** - Organize and manage your coding projects
+- 🌙 **Dark Mode** - Easy on the eyes with a beautiful dark theme
+- 🔄 **Real-time Updates** - Instant feedback and code analysis
+- 📱 **Responsive Design** - Works seamlessly on desktop and mobile
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: Next.js 14 with App Router
+- **UI Components**: Tailwind CSS
+- **Authentication**: Clerk
+- **AI Integration**: Google Gemini
+- **Code Editor**: Monaco Editor
+- **State Management**: React Hooks
+- **Animations**: Framer Motion
+- **Icons**: Lucide Icons
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+- Google Gemini API key
+- Clerk account
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/fixster.git
+cd fixster
+```
+
+2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Set up environment variables
+```bash
+cp .env.example .env.local
+```
+
+Add your API keys to `.env.local`:
+```env
+GEMINI_API_KEY=your_gemini_api_key
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
+CLERK_SECRET_KEY=your_clerk_secret_key
+```
+
+4. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Sign in** using your account
+2. **Create a new project** or select an existing one
+3. **Write or paste code** in the editor
+4. **Run the code** to see the output
+5. **Get AI assistance** through the chat interface
+6. **Save your work** and manage projects
 
-## Learn More
+## 🎯 Key Features in Detail
 
-To learn more about Next.js, take a look at the following resources:
+### AI Code Analysis
+- Real-time code debugging suggestions
+- Performance optimization tips
+- Security vulnerability detection
+- Best practices recommendations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Project Management
+- Create and organize multiple projects
+- Save code snippets
+- Track debugging history
+- Share projects with team members
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Code Editor Features
+- Syntax highlighting
+- Auto-completion
+- Error detection
+- Multiple language support
+- File saving and downloading
 
-## Deploy on Vercel
+### Chat Assistant
+- Context-aware coding help
+- Code explanations
+- Best practices guidance
+- Error troubleshooting
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Next.js](https://nextjs.org/)
+- [Clerk](https://clerk.dev/)
+- [Google Gemini](https://deepmind.google/technologies/gemini/)
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/GitDaksh">GitDaksh</a>
+</div>
