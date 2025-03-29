@@ -65,10 +65,13 @@ Provide a brief description of what the code does.
 - Include severity level and potential impact
 
 # Recommendations
-Provide specific code improvements with examples in code blocks:
+Provide specific code improvements. When showing code examples, use this exact format (note the language after the backticks and the code on a new line):
 
-\`\`\`
-// Example of improved code
+\`\`\`cpp
+// Your improved code here
+int main() {
+    // Example code
+}
 \`\`\`
 
 Here is the code to analyze:

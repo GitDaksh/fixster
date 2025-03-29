@@ -1,6 +1,10 @@
 # 🛠️ Fixster
 
 <div align="center">
+<<<<<<< Updated upstream
+=======
+  <img src="public/logo.png" alt="Fixster Logo" width="200"/>
+>>>>>>> Stashed changes
   
   <p align="center">
     An AI-powered code debugging and development assistant
@@ -50,7 +54,11 @@
 
 1. Clone the repository
 ```bash
+<<<<<<< Updated upstream
 git clone https://github.com/GitDaksh/fixster.git
+=======
+git clone https://github.com/yourusername/fixster.git
+>>>>>>> Stashed changes
 cd fixster
 ```
 
@@ -132,7 +140,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+<<<<<<< Updated upstream
 ## Acknowledgments
+=======
+## 🙏 Acknowledgments
+>>>>>>> Stashed changes
 
 - [Next.js](https://nextjs.org/)
 - [Clerk](https://clerk.dev/)

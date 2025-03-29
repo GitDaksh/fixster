@@ -14,21 +14,20 @@ export default function HistoryPanel({ setCode }: HistoryPanelProps) {
 
   useEffect(() => {
     const updatePrompts = () => {
-      if (user) {
-        const currentProjectId = localStorage.getItem("activeProject");
-        if (!currentProjectId) return;
+      if (!user) return;
 
-        setActiveProjectId(currentProjectId);
-        const project = getProject(user.id, currentProjectId);
-        if (!project) return;
+      const currentProjectId = localStorage.getItem("activeProject");
+      if (!currentProjectId) return;
 
-        // Extract only user prompts from chat history
-        const userPrompts = project.chatHistory
-          .filter(msg => msg.sender === "user")
-          .map(msg => msg.text);
+      setActiveProjectId(currentProjectId);
+      const project = getProject(user.id, currentProjectId);
+      if (!project) return;
 
-        setPrompts(userPrompts);
-      }
+      // Extract only user prompts from chat history, with null checks
+      const userPrompts = project.chatHistory?.filter(msg => msg?.sender === "user")
+                                            .map(msg => msg.text) || [];
+
+      setPrompts(userPrompts);
     };
 
     // Initial load
