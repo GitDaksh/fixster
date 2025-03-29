@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser, SignUpButton, SignInButton } from "@clerk/nextjs";
 import { getUserProjects, Project } from "./services/projectService";
-import { Code, Zap, Shield, Brain, Users, Star, ArrowRight, CheckCircle2, Terminal, GitBranch, Cpu, Lock, Github } from "lucide-react";
+import { Code, Zap, Shield, Brain, Star, ArrowRight, Terminal, GitBranch, Cpu, Github } from "lucide-react";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -190,7 +190,7 @@ export default function LandingPage() {
                   <div className="text-slate-400 text-sm">Senior Developer</div>
                 </div>
               </div>
-              <p className="text-slate-300">"Fixster has revolutionized how I debug code. The AI suggestions are incredibly accurate and have saved me countless hours."</p>
+              <p className="text-slate-300">&quot;Fixster has revolutionized how I debug code. The AI suggestions are incredibly accurate and have saved me countless hours.&quot;</p>
               <div className="flex mt-4">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -208,7 +208,7 @@ export default function LandingPage() {
                   <div className="text-slate-400 text-sm">Full Stack Developer</div>
                 </div>
               </div>
-              <p className="text-slate-300">"The real-time code analysis is a game-changer. It catches issues before they become problems and suggests improvements I hadn't considered."</p>
+              <p className="text-slate-300">&quot;The real-time code analysis is a game-changer. It catches issues before they become problems and suggests improvements I hadn&apos;t considered.&quot;</p>
               <div className="flex mt-4">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -226,7 +226,7 @@ export default function LandingPage() {
                   <div className="text-slate-400 text-sm">Tech Lead</div>
                 </div>
               </div>
-              <p className="text-slate-300">"As a tech lead, I love how Fixster helps my team write better code. It's like having an expert code reviewer available 24/7."</p>
+              <p className="text-slate-300">&quot;As a tech lead, I love how Fixster helps my team write better code. It&apos;s like having an expert code reviewer available 24/7.&quot;</p>
               <div className="flex mt-4">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
