@@ -190,7 +190,7 @@ export default function LandingPage() {
                   <div className="text-slate-400 text-sm">Senior Developer</div>
                 </div>
               </div>
-              <p className="text-slate-300">&quot;Fixster has revolutionized how I debug code. The AI suggestions are incredibly accurate and have saved me countless hours.&quot;</p>
+              <p className="text-slate-300">&quot;I&apos;m sorry, I couldn&apos;t process that request. Please try again.&quot;</p>
               <div className="flex mt-4">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
@@ -208,6 +208,7 @@ export default function LandingPage() {
                   <div className="text-slate-400 text-sm">Full Stack Developer</div>
                 </div>
               </div>
+              <p className="text-slate-300">&quot;Fixster has revolutionized how I debug code. The AI suggestions are incredibly accurate and have saved me countless hours.&quot;</p>
               <p className="text-slate-300">&quot;The real-time code analysis is a game-changer. It catches issues before they become problems and suggests improvements I hadn&apos;t considered.&quot;</p>
               <div className="flex mt-4">
                 <Star className="w-5 h-5 text-yellow-400 fill-current" />
